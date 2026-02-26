@@ -134,3 +134,18 @@ Objectif:
 - Résultat: confirmation explicite reçue (`RECU_MESSAGE_CTO`).
 - Observation clé: le CTO a également fourni un arbitrage de fond exploitable (GO_WITH_GUARDS, top briques V1, exclusions V1, gardes non négociables, critères de passage V1→V2, risque #1 + mitigation).
 - Conséquence opérationnelle: canal de communication confirmé fonctionnel; base décisionnelle disponible pour transformer en plan d’exécution détaillé.
+
+## Entry — 2026-02-26 22:36 (Europe/Paris)
+
+- Sujet: Demande d’approfondissement CTO sur les briques ARCHE/MCIT à réutiliser.
+- Action: envoi d’un message unique orienté “réutilisation par brique” (sans imposer un format rigide).
+- Axes demandés:
+  1. briques à réutiliser immédiatement,
+  2. briques à adapter (type d’adaptation + effort),
+  3. briques à exclure V1,
+  4. stratégie d’extraction (as-is / wrapper / réécriture / pattern),
+  5. matrice de dépendances critiques,
+  6. mapping au flow Mandate,
+  7. gardes sécurité spécifiques par brique,
+  8. plan “dès demain matin” (top 3 start / top 3 defer / 3 décisions à figer).
+- Statut: attente stricte de réponse CTO avant tout nouvel envoi.
