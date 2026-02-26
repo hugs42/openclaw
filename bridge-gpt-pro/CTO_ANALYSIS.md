@@ -89,3 +89,16 @@ Objectif:
   5. Risques delivery notables: incohérence PNPM/CI, e2e hétérogènes, GitOps staging à corriger.
 - Message CTO envoyé: demande d’arbitrage explicite sur décision globale, scope V1/V2/V3, exclusions V1, gating sécurité/compliance et critères d’acceptance.
 - Discipline de séquencement appliquée: une requête CTO active; aucun second message avant réponse.
+
+## Entry — 2026-02-26 20:31 (Europe/Paris)
+
+- Sujet: Réponse reçue mais insuffisamment décisionnelle (echo contexte + file context).
+- Lecture: le fond ne contient pas encore l’arbitrage attendu (GO/guards/scope explicites).
+- Décision autonome: envoi d’une relance unique de clarification (autorisée car réponse précédente reçue), sans imposer de format rigide.
+- Contenu demandé au CTO:
+  1. décision globale,
+  2. top 5 V1,
+  3. exclusions V1,
+  4. gardes non négociables,
+  5. 10 critères d’acceptance go-live.
+- Règle maintenue: attente stricte de sa réponse avant tout nouveau message.
