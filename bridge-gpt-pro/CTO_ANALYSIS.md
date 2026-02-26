@@ -158,6 +158,13 @@ Objectif:
 - Action exécutée: envoi d’une demande d’approfondissement “briques ARCHE/MCIT à réutiliser” avec les 5 rapports joints dans un seul message.
 - Statut: en attente du retour CTO (aucun second message tant qu’il n’a pas répondu dans cette nouvelle session).
 
+## Entry — 2026-02-27 00:08 (Europe/Paris)
+
+- Sujet: Demande utilisateur “Refais ta demande”.
+- Décision autonome: relance de la demande CTO via une nouvelle session dédiée (r3), avec prompt compact anti-echo et un seul artefact consolidé joint.
+- Objectif: obtenir une analyse exploitable sur la réutilisation des briques ARCHE/MCIT (sélection, adaptations, exclusions, stratégie d’extraction, dépendances, mapping flow, gardes sécurité, plan immédiat).
+- Règle appliquée: attente stricte de la réponse CTO avant tout nouvel envoi.
+
 ## Entry — 2026-02-26 23:18 (Europe/Paris)
 
 - Sujet: Réponse reçue sur la relance d’approfondissement.
