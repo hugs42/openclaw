@@ -149,3 +149,11 @@ Objectif:
   7. gardes sécurité spécifiques par brique,
   8. plan “dès demain matin” (top 3 start / top 3 defer / 3 décisions à figer).
 - Statut: attente stricte de réponse CTO avant tout nouvel envoi.
+
+## Entry — 2026-02-26 23:16 (Europe/Paris)
+
+- Sujet: “Refais ta demande” (nouvelle émission demandée par l’utilisateur).
+- Contrainte observée: la session CTO existante renvoie `400 Too many messages` sur tentative précédente.
+- Décision autonome: relancer la demande via une **nouvelle session CTO dédiée** (fresh context) pour garantir la délivrabilité.
+- Action exécutée: envoi d’une demande d’approfondissement “briques ARCHE/MCIT à réutiliser” avec les 5 rapports joints dans un seul message.
+- Statut: en attente du retour CTO (aucun second message tant qu’il n’a pas répondu dans cette nouvelle session).
