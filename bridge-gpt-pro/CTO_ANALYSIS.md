@@ -65,3 +65,15 @@ Objectif:
 - Actions correctives:
   - Journalisation de l’incident.
   - Ajout de la règle de séquencement dans mon process de travail.
+
+## Entry — 2026-02-26 20:21 (Europe/Paris)
+
+- Sujet: Réponse CTO reçue après attente.
+- Retour CTO (synthèse): plan orienté exécution P0 bridge (8 issues), avec duplication de contenu.
+- Analyse lead dev: prendre le fond comme retour valide de priorisation opérationnelle; compléter par questions de clarification sur l’objectif précis “intégration MCIT/ARCHE”.
+- Questions de clarification prévues:
+  1. Décision explicite d’intégration MCIT: GO / GO_WITH_GUARDS / NO_GO ?
+  2. Quelles 5 briques MCIT prioriser en V1 ?
+  3. Quelles briques exclure explicitement de V1 ?
+  4. Quels critères de gating minimum avant implémentation ?
+- Décision de travail: transformer le retour CTO en base de plan, puis fermer les ambiguïtés par questions courtes et ciblées.
