@@ -212,6 +212,20 @@ Objectif:
   - Décisions d’archi à figer: contrat tenant global, déterminisme hash/signature, politique fail-closed globale.
 - Prochaine étape recommandée: transformer cet arbitrage en backlog d’implémentation ordonné (issues + dépendances + DoD + critères GO).
 
+## Entry — 2026-02-27 00:48 (Europe/Paris)
+
+- Sujet: Consignes CTO complètes de démarrage (stack, structure repo, architecture interne, gates qualité, plan jour 1-2).
+- Analyse lead:
+  1. les directives fixent un standard d’équipe complet (tech + architecture + sécurité + delivery),
+  2. elles sont suffisamment prescriptives pour démarrer l’implémentation sans ambiguïté,
+  3. elles permettent de structurer immédiatement un bootstrap backlog ordonné.
+- Actions exécutées:
+  - création `docs/mandate-v0.1/ARCH_INVARIANTS.md`,
+  - création `docs/mandate-v0.1/REPO_STRUCTURE.md`,
+  - création `docs/mandate-v0.1/DEV_GUIDE.md`,
+  - création `TASK-BOOTSTRAP.md` (15 premières issues ordonnées + DoD + dépendances).
+- Décision de travail: utiliser ces documents comme baseline opérationnelle unique pour lancer les tickets V1.
+
 ## Entry — 2026-02-27 00:40 (Europe/Paris)
 
 - Sujet: Réception directives d’architecture CTO (DIR-01..DIR-70).
