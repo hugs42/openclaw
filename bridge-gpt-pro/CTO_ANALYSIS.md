@@ -172,3 +172,10 @@ Objectif:
 - Analyse: le canal répond, mais la qualité de réponse reste perturbée par l’injection de contexte brut.
 - Décision de travail: synthétiser ce statut à l’utilisateur, puis préparer une relance ultra-ciblée si validation.
 - Contrainte maintenue: aucun second message au CTO tant qu’une décision explicite n’est pas prise côté utilisateur.
+
+## Entry — 2026-02-27 00:09 (Europe/Paris)
+
+- Sujet: Échec technique de la relance CTO r3.
+- Résultat observé: la demande n’a pas été traitée; erreur d’accessibilité macOS (`Accessibility permission denied`), aucune sortie utile.
+- Impact: pas de nouveau retour CTO exploitable sur l’analyse des briques MCIT.
+- Décision: informer immédiatement l’utilisateur et proposer une nouvelle relance après restauration complète des permissions d’accessibilité.
