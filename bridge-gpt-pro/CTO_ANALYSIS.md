@@ -211,3 +211,16 @@ Objectif:
   - Defer: evidence-store, orchestrator, event-ingest runtime.
   - Décisions d’archi à figer: contrat tenant global, déterminisme hash/signature, politique fail-closed globale.
 - Prochaine étape recommandée: transformer cet arbitrage en backlog d’implémentation ordonné (issues + dépendances + DoD + critères GO).
+
+## Entry — 2026-02-27 00:40 (Europe/Paris)
+
+- Sujet: Réception directives d’architecture CTO (DIR-01..DIR-70).
+- Lecture lead:
+  1. directives suffisamment précises pour cadrer implémentation, PR review et tests,
+  2. invariants critiques explicités (Pattern B, anti-SOAR, fail-closed, tenant, RBAC signé),
+  3. ordre V1/V2/V3 clarifié sans ambiguïté.
+- Actions exécutées immédiatement:
+  - création `MANDATE_P0_FREEZE_v0.1.md` (invariants + DoD),
+  - création `MANDATE_PR_REVIEW_CHECKLIST.md`,
+  - création `MANDATE_EXECUTION_ORDER_V1_V2_V3.md`.
+- Décision de travail: utiliser ces 3 documents comme base de pilotage unique pour backlog/tickets/PR.
