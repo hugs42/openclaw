@@ -196,3 +196,18 @@ Objectif:
   - rappel des briques immédiates, adaptations et exclusions (déjà présentes dans v2),
   - aucun arbitrage nouveau spécifique aux questions d’approfondissement demandées.
 - Conclusion de travail: réponse partiellement utile comme confirmation, mais insuffisante pour l’objectif “approfondissement CTO original”.
+
+## Entry — 2026-02-27 00:33 (Europe/Paris)
+
+- Sujet: Réception d’une réponse CTO détaillée et exploitable (transmise manuellement par l’utilisateur).
+- Qualité perçue: élevée, avec arbitrage concret par brique + stratégie d’intégration + gardes de sécurité + plan immédiat.
+- Décisions CTO confirmées:
+  1. Top briques V1: auth v3+anti-replay, idempotence, policy runtime, executor graph + kill-switch, attestation/evidence primitives.
+  2. Exclusions V1: evidence-store complet, orchestrator complet, event-ingest en service runtime, governance complète, graph-client/WASM non prod.
+  3. Gardes non négociables: baseline SHA figée, fail-closed strict, tenant-scoping systématique, RBAC sur claims signés uniquement, tests anti-replay/cross-tenant/idempotence.
+  4. Stratégie d’extraction: majoritairement as-is + wrappers aux frontières Mandate; réécritures ciblées sur points P0 (notamment attest tenant isolation).
+- Plan exécutable validé (lecture lead):
+  - Start immédiat: baseline freeze, correction P0 tenant attest-svc, noyau V1 E2E.
+  - Defer: evidence-store, orchestrator, event-ingest runtime.
+  - Décisions d’archi à figer: contrat tenant global, déterminisme hash/signature, politique fail-closed globale.
+- Prochaine étape recommandée: transformer cet arbitrage en backlog d’implémentation ordonné (issues + dépendances + DoD + critères GO).
