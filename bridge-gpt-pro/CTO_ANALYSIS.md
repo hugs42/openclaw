@@ -102,3 +102,14 @@ Objectif:
   4. gardes non négociables,
   5. 10 critères d’acceptance go-live.
 - Règle maintenue: attente stricte de sa réponse avant tout nouveau message.
+
+## Entry — 2026-02-26 21:42 (Europe/Paris)
+
+- Sujet: Vérification factuelle des envois de rapports au CTO (historique de session).
+- Méthode: audit des logs de session (`~/.openclaw/agents/main/sessions/*.jsonl`) sur les messages contenant `[BRIDGE_FILES]`.
+- Constat principal:
+  - Oui, les rapports ont bien été transmis en message unique sur plusieurs itérations.
+  - Envoi clé "tout-en-un" détecté à 20:06 (8 fichiers) dans la session CTO (`f12bcefa-...`).
+  - Envoi de clarification détecté à 20:31 (5 fichiers) dans un seul message.
+- Limite observée: le CTO a souvent renvoyé un echo du contexte (`[FILE_CONTEXT]`) au lieu d’un arbitrage final synthétique.
+- Décision de travail: conserver la stratégie “message unique complet”, puis attendre une réponse décisionnelle explicite avant tout nouvel envoi.
