@@ -186,3 +186,13 @@ Objectif:
 - Action exécutée: relance CTO r4 via nouvelle session dédiée, avec prompt compact anti-echo et rapport consolidé unique joint.
 - Intention: obtenir enfin une analyse exploitable sur les briques ARCHE/MCIT réutilisables (sélection, adaptation, exclusions, dépendances, mapping, gardes, plan immédiat).
 - Politique appliquée: aucune relance supplémentaire tant que le CTO n’a pas répondu à r4.
+
+## Entry — 2026-02-27 00:19 (Europe/Paris)
+
+- Sujet: Réponse CTO sur r4.
+- Résultat observé: retour non approfondi, essentiellement constitué de la consigne renvoyée + contenu `[FILE_CONTEXT]` du rapport consolidé v2.
+- Valeur extraite:
+  - confirmation de la ligne stratégique déjà connue: extraction sélective, GO_WITH_CONDITIONS,
+  - rappel des briques immédiates, adaptations et exclusions (déjà présentes dans v2),
+  - aucun arbitrage nouveau spécifique aux questions d’approfondissement demandées.
+- Conclusion de travail: réponse partiellement utile comme confirmation, mais insuffisante pour l’objectif “approfondissement CTO original”.
