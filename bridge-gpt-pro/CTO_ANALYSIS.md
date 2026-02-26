@@ -126,3 +126,11 @@ Objectif:
   5. critères de réussite/go-live et avis prioritaire.
 - Artefacts joints dans le même message: 5 rapports (`TASK-001-MCIT-Deep-Audit-v2`, workers A/B/C, provenance).
 - Statut: en attente de réponse CTO (no second message policy active).
+
+## Entry — 2026-02-26 22:33 (Europe/Paris)
+
+- Sujet: Vérification de réception côté CTO.
+- Action: message de test envoyé au CTO pour confirmer la réception.
+- Résultat: confirmation explicite reçue (`RECU_MESSAGE_CTO`).
+- Observation clé: le CTO a également fourni un arbitrage de fond exploitable (GO_WITH_GUARDS, top briques V1, exclusions V1, gardes non négociables, critères de passage V1→V2, risque #1 + mitigation).
+- Conséquence opérationnelle: canal de communication confirmé fonctionnel; base décisionnelle disponible pour transformer en plan d’exécution détaillé.
