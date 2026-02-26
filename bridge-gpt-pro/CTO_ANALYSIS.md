@@ -77,3 +77,15 @@ Objectif:
   3. Quelles briques exclure explicitement de V1 ?
   4. Quels critères de gating minimum avant implémentation ?
 - Décision de travail: transformer le retour CTO en base de plan, puis fermer les ambiguïtés par questions courtes et ciblées.
+
+## Entry — 2026-02-26 20:30 (Europe/Paris)
+
+- Sujet: Préparation d’un message CTO exhaustif (intégration ARCHE/MCIT).
+- Réflexion approfondie (synthèse inter-rapports):
+  1. Direction stratégique cohérente: extraction sélective plutôt que reprise monolithique.
+  2. Blocage sécurité P0 à verrouiller avant extraction: RBAC fondé sur claims signés, isolation tenant stricte attest/evidence, baseline SHA figée.
+  3. Noyau V1 probable: auth v3+anti-replay, idempotence, policy runtime, executor graph 3 actions, attestation minimale.
+  4. Composants à différer: evidence-store complet, orchestrator large, graph-client incomplet.
+  5. Risques delivery notables: incohérence PNPM/CI, e2e hétérogènes, GitOps staging à corriger.
+- Message CTO envoyé: demande d’arbitrage explicite sur décision globale, scope V1/V2/V3, exclusions V1, gating sécurité/compliance et critères d’acceptance.
+- Discipline de séquencement appliquée: une requête CTO active; aucun second message avant réponse.
