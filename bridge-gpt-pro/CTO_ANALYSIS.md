@@ -179,3 +179,10 @@ Objectif:
 - Résultat observé: la demande n’a pas été traitée; erreur d’accessibilité macOS (`Accessibility permission denied`), aucune sortie utile.
 - Impact: pas de nouveau retour CTO exploitable sur l’analyse des briques MCIT.
 - Décision: informer immédiatement l’utilisateur et proposer une nouvelle relance après restauration complète des permissions d’accessibilité.
+
+## Entry — 2026-02-27 00:17 (Europe/Paris)
+
+- Sujet: Nouvelle demande utilisateur “Refais ta demande”.
+- Action exécutée: relance CTO r4 via nouvelle session dédiée, avec prompt compact anti-echo et rapport consolidé unique joint.
+- Intention: obtenir enfin une analyse exploitable sur les briques ARCHE/MCIT réutilisables (sélection, adaptation, exclusions, dépendances, mapping, gardes, plan immédiat).
+- Politique appliquée: aucune relance supplémentaire tant que le CTO n’a pas répondu à r4.
