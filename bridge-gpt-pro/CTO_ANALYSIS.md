@@ -277,3 +277,10 @@ Objectif:
 - Action exécutée: renvoi complet de la demande de review au CTO dans une nouvelle session dédiée (`cto-review-plan-docs-r3`).
 - Documents transmis: mêmes 8 artefacts de plan (freeze, checklist, ordre d’exécution, bootstrap, invariants, structure repo, dev guide, draft issues).
 - Statut: en attente de réponse CTO sur cette relance (aucun nouveau message intermédiaire).
+
+## Entry — 2026-02-27 02:13 (Europe/Paris)
+
+- Sujet: Échec technique de la relance CTO r3.
+- Résultat observé: échec `No ChatGPT window found` (pas de fenêtre ChatGPT disponible côté bridge).
+- Impact: aucun retour de review CTO produit.
+- Action recommandée: relancer après ouverture/activation d’une fenêtre ChatGPT valide.
