@@ -224,3 +224,34 @@ Objectif:
   - création `MANDATE_PR_REVIEW_CHECKLIST.md`,
   - création `MANDATE_EXECUTION_ORDER_V1_V2_V3.md`.
 - Décision de travail: utiliser ces 3 documents comme base de pilotage unique pour backlog/tickets/PR.
+
+## Entry — 2026-02-27 22:25 (Europe/Paris)
+
+- Sujet: Prise de contact CTO réussie + échange projet opérationnel.
+- Contexte transmis au CTO: salutation/présentation lead dev puis demande structurée sur état réel projet, priorités 24h/48h/7j, risques+mitigations, décisions à figer, critères GO/NO-GO.
+- Retour CTO (synthèse):
+  1. Cap valide mais crédibilité audit-grade non encore prouvée (preuves CI insuffisantes).
+  2. Blocage majeur: baseline MCIT non clean (dirty>0) => extraction bloquée tant que source non propre.
+  3. Priorités strictes: baseline propre + freeze contracts v0.1.0 + gates CI binaires + durcissement fail-closed + E2E v0.1 complet en CI.
+  4. Risques critiques confirmés: fail-open, cross-tenant, drift contractuel, scope creep V1, instabilité canal bridge.
+  5. Décisions à figer maintenant: spec tenant globale, STEP_UP en DENY V1, spec idempotence immuable, budgets fail-closed bornés, source de vérité unique périmètre V1.
+  6. Triggers NO-GO explicites: baseline non clean, fail-open, cross-tenant, fuite secrets, hors-scope V1, changements contracts sans bump/validation.
+- Analyse lead dev:
+  - Retour fortement exécutable, avec ordre de priorités clair et critères d’arrêt explicites.
+  - Le point décisif est la reproductibilité provenance (baseline clean + SHA + manifest) avant tout progrès de fond.
+  - Les gates CI doivent devenir la vérité opérationnelle (PASS/FAIL) pour convertir le cadrage en preuve.
+- Zones floues:
+  1. Repo/snapshot exact attendu pour relocker baseline propre (local vs remote de référence).
+  2. Priorité relative entre stabilisation du canal bridge et livraison des gates CI de sécurité.
+  3. Format exact des artefacts de preuve attendus (naming/rétention).
+- Questions de clarification à poser:
+  1. Quelle source de référence utilises-tu pour la baseline clean (commit/branch exact) ?
+  2. Quel ordre strict imposes-tu entre hardening bridge et gates sécurité CI si les deux se bloquent mutuellement ?
+  3. Quel format d’artefact veux-tu pour valider GO (rapport unique, JSONL, matrice exigences->tests) ?
+- Décision de travail:
+  - Considérer ce briefing comme base canonique immédiate d’exécution lead dev.
+  - Préparer un plan d’actions ordonné et binaire orienté preuves CI.
+- Actions exécutées:
+  - Salutation/présentation CTO effectuées et confirmées par nonce.
+  - Échange projet engagé et réponse détaillée reçue.
+  - Journalisation de l’analyse dans ce document.
