@@ -360,3 +360,16 @@ Objectif:
 - Résultat: réponse CTO reçue (contenu substantiel complet: état, cohérence, risques, priorités 24h/48h/7j, GO/NO-GO).
 - Limite observée: sortie bridge partiellement bruitée (duplication de blocs + echo `[FILE_CONTEXT]`), mais fond décisionnel exploitable maintenu.
 - Décision de travail: conserver le fond CTO, nettoyer les duplications côté lead-dev pour consommation utilisateur.
+
+## Entry — 2026-02-27 18:06 (Europe/Paris)
+
+- Sujet: Demande utilisateur “Prends tes consignes auprès du CTO” (Mandate).
+- Action exécutée: demande de directives opérationnelles complètes au CTO, sans contrainte de format, avec 6 artefacts de contexte Mandate joints.
+- Résultat: consignes exhaustives reçues (ordre de mission, contrôles bloquants, risques continus, escalade CTO, GO/NO-GO, recommandations de verrouillage).
+- Contenu clé confirmé:
+  1. passer immédiatement en mode **proof-driven** (et non doc-driven),
+  2. priorités strictes 24h/48h/7j avec dépendances,
+  3. triggers stop-the-line explicites (baseline non reproductible, fail-open, faille tenant, scope creep, etc.),
+  4. exigence d’un **Lock Dossier V1** traçable.
+- Limite observée: duplication/echo `[FILE_CONTEXT]` persistants dans la sortie bridge; fond exploitable conservé.
+- Livrable créé: `analysis-cto-consignes-mandate-2026-02-27.md` (consolidation exécutable des consignes CTO).
