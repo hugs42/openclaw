@@ -263,3 +263,10 @@ Objectif:
   - `V1_ISSUES_GITHUB_DRAFT.md`
 - Demande de review adressée au CTO: synthèse, conformité, écarts P0/P1, corrections par document, verdict readiness V1 et 5 actions immédiates.
 - Statut: en attente de la réponse CTO (aucun second message tant qu’il n’a pas répondu).
+
+## Entry — 2026-02-27 01:16 (Europe/Paris)
+
+- Sujet: Demande utilisateur de renvoi complet sans contrainte de forme.
+- Action exécutée: renvoi d’une demande complète de review dans une nouvelle session CTO dédiée, avec les 8 documents joints.
+- Formulation: demande ouverte (sans cadrage contraignant), orientée qualité de revue (cohérence, écarts, corrections, readiness, ordre d’exécution).
+- Statut: en attente du retour CTO sur ce renvoi.
