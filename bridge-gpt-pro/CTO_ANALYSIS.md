@@ -311,3 +311,10 @@ Objectif:
 - Action exécutée: envoi d’une nouvelle demande d’approfondissement CTO (`cto-deepdive-r5`) avec les 8 documents de plan joints.
 - Cible de la demande: robustesse V1, risques critiques restants, arbitrages immédiats, angles morts, recommandations prioritaires, verdict readiness.
 - Statut: en attente de la réponse CTO.
+
+## Entry — 2026-02-27 03:05 (Europe/Paris)
+
+- Sujet: Échec technique de la relance CTO r5.
+- Résultat observé: erreur `Previous ChatGPT response is still pending`.
+- Analyse: le canal CTO refuse un nouveau prompt tant qu’une réponse précédente n’est pas finalisée.
+- Statut: demande CTO non livrée; attente d’un créneau valide pour nouvelle relance.
