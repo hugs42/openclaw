@@ -350,3 +350,13 @@ Objectif:
 - Retour CTO reçu: synthèse exploitable et détaillée (état actuel, cohérence, risques prioritaires, angles morts, priorités 24h/48h/7j, conditions GO/NO-GO).
 - Analyse lead-dev: réponse de bonne qualité, cohérente avec le cadrage existant; point de vigilance principal confirmé = reproductibilité baseline MCIT + passage du plan aux preuves CI.
 - Livrable créé: `analysis-cto-synthese-situation-2026-02-27.md` (analyse approfondie + plan opérationnel).
+
+## Entry — 2026-02-27 17:42 (Europe/Paris)
+
+- Sujet: Demande utilisateur “demande une synthèse complète au CTO et attends sa réponse”.
+- Action exécutée: envoi d’une demande exhaustive au CTO avec 8 artefacts joints (contexte projet + analyses + directives + backlog V1).
+- Incident initial: rejet `400 Too many bridge_files entries` sur première tentative (9 pièces jointes).
+- Correctif immédiat: réduction à 8 pièces jointes, renvoi immédiat.
+- Résultat: réponse CTO reçue (contenu substantiel complet: état, cohérence, risques, priorités 24h/48h/7j, GO/NO-GO).
+- Limite observée: sortie bridge partiellement bruitée (duplication de blocs + echo `[FILE_CONTEXT]`), mais fond décisionnel exploitable maintenu.
+- Décision de travail: conserver le fond CTO, nettoyer les duplications côté lead-dev pour consommation utilisateur.
