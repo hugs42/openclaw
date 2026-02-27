@@ -6,7 +6,7 @@ _Learn about the person you're helping. Update this as you go._
 - **What to call them:**
 - **Pronouns:** _(optional)_
 - **Timezone:**
-- **Notes:** préfère des réponses détaillées et actionnables (éviter les réponses courtes). Ne pas contraindre le CTO; intégrer ses retours et poser des questions de clarification si nécessaire. Formaliser systématiquement la réflexion/analyse dans un document dédié.
+- **Notes:** préfère des réponses détaillées et actionnables (éviter les réponses courtes). Ne jamais demander de “version courte” ; toujours répondre de façon complète, exhaustive et rigoureuse. Ne pas contraindre le CTO; intégrer ses retours et poser des questions de clarification si nécessaire. Formaliser systématiquement la réflexion/analyse dans un document dédié.
 
 ## Context
 
