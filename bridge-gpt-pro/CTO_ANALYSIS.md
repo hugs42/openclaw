@@ -248,3 +248,18 @@ Objectif:
   3. garde-fous sécurité et exclusions V1 explicitement cadrés.
 - Action exécutée: génération d’un backlog issue-ready pour GitHub dans `docs/mandate-v0.1/V1_ISSUES_GITHUB_DRAFT.md` (12 issues avec dépendances, DoD, owners suggérés).
 - Prochaine étape: publier ces 12 issues dans le repo cible avec labels/priorités et ordre de merge.
+
+## Entry — 2026-02-27 01:14 (Europe/Paris)
+
+- Sujet: Transmission de tous les documents de plan au CTO pour review.
+- Action exécutée: envoi d’un message unique de revue au CTO avec 8 artefacts joints:
+  - `MANDATE_P0_FREEZE_v0.1.md`
+  - `MANDATE_PR_REVIEW_CHECKLIST.md`
+  - `MANDATE_EXECUTION_ORDER_V1_V2_V3.md`
+  - `TASK-BOOTSTRAP.md`
+  - `ARCH_INVARIANTS.md`
+  - `REPO_STRUCTURE.md`
+  - `DEV_GUIDE.md`
+  - `V1_ISSUES_GITHUB_DRAFT.md`
+- Demande de review adressée au CTO: synthèse, conformité, écarts P0/P1, corrections par document, verdict readiness V1 et 5 actions immédiates.
+- Statut: en attente de la réponse CTO (aucun second message tant qu’il n’a pas répondu).
