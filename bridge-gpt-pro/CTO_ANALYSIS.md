@@ -373,3 +373,15 @@ Objectif:
   4. exigence d’un **Lock Dossier V1** traçable.
 - Limite observée: duplication/echo `[FILE_CONTEXT]` persistants dans la sortie bridge; fond exploitable conservé.
 - Livrable créé: `analysis-cto-consignes-mandate-2026-02-27.md` (consolidation exécutable des consignes CTO).
+
+## Entry — 2026-02-27 18:12 (Europe/Paris)
+
+- Sujet: Validation de fraîcheur des réponses CTO (incident de faux positif).
+- Constat: une “réponse CTO” a été traitée comme finale alors que des indices forts indiquaient une extraction potentiellement stale (latence quasi nulle entre envoi/réponse + duplication + echo `[FILE_CONTEXT]`).
+- Cause probable: scraping bridge capturant un buffer assistant non strictement lié à la nouvelle requête.
+- Correctif process (obligatoire):
+  1. inclure un nonce/token unique dans la requête CTO,
+  2. exiger reprise explicite du nonce en première ligne de réponse,
+  3. rejeter toute sortie avec latence non plausible ou echo brut `[FILE_CONTEXT]` non nettoyé,
+  4. ne jamais annoncer “CTO a répondu” sans validation de fraîcheur.
+- Décision: notifier explicitement l’utilisateur de l’erreur de qualification et corriger le protocole dès la prochaine requête CTO.
