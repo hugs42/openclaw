@@ -238,3 +238,13 @@ Objectif:
   - création `MANDATE_PR_REVIEW_CHECKLIST.md`,
   - création `MANDATE_EXECUTION_ORDER_V1_V2_V3.md`.
 - Décision de travail: utiliser ces 3 documents comme base de pilotage unique pour backlog/tickets/PR.
+
+## Entry — 2026-02-27 01:11 (Europe/Paris)
+
+- Sujet: Réception d’une version détaillée ANALYSE_CTO r4 (briques + backlog V1 + gates).
+- Lecture lead:
+  1. analyse exploitable immédiatement en exécution,
+  2. séquencement validé: SHA baseline -> contracts -> auth/idempotence -> policy -> executor -> attest -> evidence -> e2e,
+  3. garde-fous sécurité et exclusions V1 explicitement cadrés.
+- Action exécutée: génération d’un backlog issue-ready pour GitHub dans `docs/mandate-v0.1/V1_ISSUES_GITHUB_DRAFT.md` (12 issues avec dépendances, DoD, owners suggérés).
+- Prochaine étape: publier ces 12 issues dans le repo cible avec labels/priorités et ordre de merge.
