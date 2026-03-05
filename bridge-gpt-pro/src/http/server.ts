@@ -2,13 +2,13 @@ import express, { type Express, type NextFunction, type Request, type Response }
 import { nanoid } from "nanoid";
 import type { Logger } from "pino";
 import type { BridgeConfig } from "../config.js";
-import { createOpenAiRouter } from "./openaiRoutes.js";
 import type { RawExchangeLogger, RawExchangeRecord } from "../rawExchangeLog.js";
 import { sanitizeHeaders } from "../rawExchangeLog.js";
+import type { SessionBindingStore } from "../session/store.js";
 import type { ChatGPTDriver, UiAutomationHealth } from "../ui/chatgptApp.js";
 import type { QueueLike } from "../utils/queue.js";
 import type { RateLimiter } from "../utils/rateLimit.js";
-import type { SessionBindingStore } from "../session/store.js";
+import { createOpenAiRouter } from "./openaiRoutes.js";
 
 interface HttpServerDependencies {
   config: BridgeConfig;
@@ -18,6 +18,11 @@ interface HttpServerDependencies {
   rateLimiter: RateLimiter;
   sessionBindingStore?: SessionBindingStore;
   rawExchangeLogger?: RawExchangeLogger;
+}
+
+interface UiAutomationHealthCacheEntry {
+  value: UiAutomationHealth;
+  expiresAtMs: number;
 }
 
 type RawHttpEventPayload = {
@@ -33,7 +38,12 @@ function defaultUiAutomationHealth(): UiAutomationHealth {
   };
 }
 
-function applyBaseHeaders(config: BridgeConfig, queueDepth: number, rid: string, res: Response): void {
+function applyBaseHeaders(
+  config: BridgeConfig,
+  queueDepth: number,
+  rid: string,
+  res: Response,
+): void {
   res.setHeader("x-bridge-version", config.version);
   res.setHeader("x-bridge-request-id", rid);
   res.setHeader("x-bridge-queue-depth", String(queueDepth));
@@ -59,10 +69,7 @@ function snapshotRequest(req: Request): {
   };
 }
 
-function logRawHttpEvent(
-  deps: HttpServerDependencies,
-  entry: RawHttpEventPayload,
-): void {
+function logRawHttpEvent(deps: HttpServerDependencies, entry: RawHttpEventPayload): void {
   if (!deps.rawExchangeLogger) {
     return;
   }
@@ -82,12 +89,17 @@ function logRawHttpEvent(
 
 export function createHttpApp(deps: HttpServerDependencies): Express {
   const app = express();
+  const uiHealthCacheTtlMs = deps.config.healthUiPreflightCacheMs;
+  let uiHealthCache: UiAutomationHealthCacheEntry | null = null;
 
   app.disable("x-powered-by");
 
   app.use((req, res, next) => {
     const headerRequestId = req.header("x-request-id");
-    const rid = typeof headerRequestId === "string" && headerRequestId.trim().length > 0 ? headerRequestId.trim() : nanoid();
+    const rid =
+      typeof headerRequestId === "string" && headerRequestId.trim().length > 0
+        ? headerRequestId.trim()
+        : nanoid();
     (res.locals as { rid?: string }).rid = rid;
 
     applyBaseHeaders(deps.config, deps.queue.getDepth(), rid, res);
@@ -158,17 +170,30 @@ export function createHttpApp(deps: HttpServerDependencies): Express {
 
     let uiAutomation = defaultUiAutomationHealth();
     if (typeof deps.driver.getUiAutomationHealth === "function") {
-      try {
-        uiAutomation = await deps.driver.getUiAutomationHealth();
-      } catch (error) {
-        const message = error instanceof Error ? error.message : String(error);
-        uiAutomation = {
-          ok: false,
-          accessibility: "unknown",
-          appRunning: null,
-          code: "unknown",
-          message,
-        };
+      const nowMs = Date.now();
+      const cached = uiHealthCache;
+      if (cached && nowMs < cached.expiresAtMs) {
+        uiAutomation = cached.value;
+      } else {
+        try {
+          uiAutomation = await deps.driver.getUiAutomationHealth();
+        } catch (error) {
+          const message = error instanceof Error ? error.message : String(error);
+          uiAutomation = {
+            ok: false,
+            accessibility: "unknown",
+            appRunning: null,
+            code: "unknown",
+            message,
+          };
+        }
+
+        if (uiHealthCacheTtlMs > 0) {
+          uiHealthCache = {
+            value: uiAutomation,
+            expiresAtMs: nowMs + uiHealthCacheTtlMs,
+          };
+        }
       }
     }
 
@@ -217,7 +242,10 @@ export function createHttpApp(deps: HttpServerDependencies): Express {
   });
 
   app.use((error: Error, req: Request, res: Response, _next: NextFunction) => {
-    deps.logger.error({ event: "http_unhandled_error", message: error.message, stack: error.stack }, "http_unhandled_error");
+    deps.logger.error(
+      { event: "http_unhandled_error", message: error.message, stack: error.stack },
+      "http_unhandled_error",
+    );
     const rid = (res.locals as { rid?: string }).rid ?? nanoid();
     applyBaseHeaders(deps.config, deps.queue.getDepth(), rid, res);
     const payload = {

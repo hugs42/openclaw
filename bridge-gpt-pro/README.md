@@ -3,6 +3,7 @@
 `claude-chatgpt-mcp` is a macOS bridge that automates the ChatGPT desktop app through AppleScript/Accessibility.
 
 It now supports two modes:
+
 - `mcp` (default): stdio MCP server for Claude/Smithery
 - `http`: local OpenAI-compatible HTTP server (`/v1/models`, `/v1/chat/completions`)
 
@@ -38,6 +39,7 @@ npm start
 ```
 
 HTTP defaults:
+
 - `HTTP_HOST=127.0.0.1`
 - `HTTP_PORT=19000`
 
@@ -68,12 +70,14 @@ scripts/bridge-service.sh logs
 - `GET /v1/bridge/conversations`
 
 Auth is required for `/v1/*`:
+
 - `Authorization: Bearer <CHATGPT_BRIDGE_TOKEN>`
 
 ### `GET /health`
 
 `/health` is unauthenticated and returns both process liveness and UI-automation
 readiness:
+
 - `ok=true`: HTTP bridge process is up
 - `ready`: UI automation preflight result
 - `uiAutomation.code=accessibility_denied`: macOS Accessibility permission is missing for the bridge process
@@ -171,6 +175,7 @@ curl -N \
 ### Sticky conversation routing (optional)
 
 When `SESSION_BINDING_MODE=sticky` or `SESSION_BINDING_MODE=explicit`, the completion body can include:
+
 - `conversation_id` (exact ChatGPT sidebar title)
 - `session_key` (slot key used for binding persistence)
 
@@ -191,6 +196,7 @@ curl -s \
 ```
 
 Response headers include:
+
 - `x-bridge-session-slot`
 - `x-bridge-conversation-id`
 
@@ -205,11 +211,13 @@ curl -s \
 ## OpenClaw provider snippet
 
 Point OpenClaw (or any OpenAI-compatible client) to:
+
 - Base URL: `http://127.0.0.1:19000`
 - API key: your `CHATGPT_BRIDGE_TOKEN`
 - Model: `chatgpt-macos`
 
 Expected flow is:
+
 1. `GET /v1/models`
 2. `POST /v1/chat/completions`
 
@@ -218,10 +226,12 @@ Expected flow is:
 See `.env.example` for all options.
 
 High-impact defaults:
+
 - `BRIDGE_MODE=mcp`
 - `MAX_QUEUE_SIZE=20`
 - `JOB_TIMEOUT_MS=3615000`
 - `MAX_WAIT_SEC=3600`
+- `HEALTH_UI_PREFLIGHT_CACHE_MS=180000` (cache `/health` UI preflight for 3 minutes)
 - `MAX_MESSAGE_CHARS=512000`
 - `MAX_PROMPT_CHARS=512000`
 - `FILE_CONTEXT_ENABLED=true`
@@ -246,33 +256,40 @@ High-impact defaults:
 - `RAW_EXCHANGE_LOG_PRIVACY=safe_raw` (`safe_raw|header_only|metadata_only`)
 
 Single-flight admission:
+
 - `POST /v1/chat/completions` is serialized through a single-flight queue (`concurrency=1`).
 - If a prior prompt is still running, a new prompt is rejected with `409 previous_response_pending` (no queueing).
 - This guarantees each new prompt can be built only after the previous response is available.
 
 Session binding modes:
+
 - `off`: legacy behavior, no sticky binding persistence
 - `sticky`: use `conversation_id` first, then slot binding, then active conversation fallback
 - `explicit`: require `conversation_id` on every request
 
 Strict opening:
+
 - `SESSION_BINDING_STRICT_OPEN=true`: missing conversation title returns `404 conversation_not_found`
 - `SESSION_BINDING_STRICT_OPEN=false`: warning + fallback to active conversation
 
 Completion indicators:
+
 - `REQUIRE_COMPLETION_INDICATORS=false`: do not require UI labels to conclude generation (default)
 - `REQUIRE_COMPLETION_INDICATORS=true`: require labels like `UI_LABEL_REGENERATE`/`UI_LABEL_CONTINUE`
 
 Long-running responses:
+
 - Defaults are configured to support waits beyond 30 minutes.
 - Keep `MAX_WAIT_SEC` and `JOB_TIMEOUT_MS` aligned for your workload.
 
 Prompt size limits:
+
 - `MAX_MESSAGE_CHARS` and `MAX_PROMPT_CHARS` default to `512000` chars
 - This aligns with ChatGPT's 128k input-token scale using ~4 chars/token
 - `bridge_files` content is merged into the final prompt and still counted against `MAX_PROMPT_CHARS`
 
 Rollback:
+
 - Set `SESSION_BINDING_MODE=off` at runtime to disable sticky routing immediately
 
 ## Security and operational notes
@@ -290,6 +307,7 @@ Rollback:
 Structured logs are emitted to `stderr` (JSON by default).
 
 Config:
+
 - `LOG_LEVEL=debug|info|warn|error`
 - `LOG_FORMAT=json|pretty`
 - `LOG_INCLUDE_AX_DUMP=false` (leave disabled in production)
@@ -297,25 +315,30 @@ Config:
 ### Raw exchange audit logging
 
 When enabled, the bridge writes append-only JSONL audit events covering:
+
 - HTTP request/response flows (including `/health`, parse errors, 404, 500)
 - MCP request/response flows (`ListTools`, `CallTool`, errors)
 - Prompt lifecycle (`chatgpt_prompt_rendered_raw`, `chatgpt_prompt_send_raw`, `chatgpt_prompt_response_raw`)
 
 Default path:
+
 - `~/.openclaw/chatgpt-pro-bridge/logs/raw-exchanges.jsonl`
 
 Retention policy:
+
 - Size rotation in ring (`raw-exchanges.jsonl`, `.1`, `.2`, ...)
 - Max file size: `RAW_EXCHANGE_LOG_MAX_BYTES` (default 64MB)
 - Max retained files: `RAW_EXCHANGE_LOG_MAX_FILES` (default 20)
 - Age purge: `RAW_EXCHANGE_LOG_MAX_AGE_DAYS` (default 30 days)
 
 Privacy modes:
+
 - `safe_raw` (default): redacts sensitive headers and known secret-like JSON/query fields
 - `header_only`: redacts sensitive headers only
 - `metadata_only`: stores metadata/sizes instead of full payload bodies
 
 Security note:
+
 - Raw audit logs can still contain sensitive business context. Keep log files local, protected by filesystem permissions, and avoid sharing them externally.
 
 Quick lookup example by request id:

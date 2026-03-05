@@ -229,6 +229,31 @@ describe("HTTP contract", () => {
     expect(response.body.uiAutomation.accessibility).toBe("denied");
   });
 
+  it("caches UI preflight health checks for repeated /health calls", async () => {
+    let healthCalls = 0;
+    const driver: ChatGPTDriver = {
+      ensureRunning: async () => undefined,
+      ask: async () => ({ text: "bridge response", contextReset: 0 }),
+      getConversations: async () => ["A", "B"],
+      getUiAutomationHealth: async () => {
+        healthCalls += 1;
+        return {
+          ok: true,
+          accessibility: "granted",
+          appRunning: true,
+        };
+      },
+    };
+
+    const app = buildApp({ driver, env: { HEALTH_UI_PREFLIGHT_CACHE_MS: "180000" } });
+    const first = await request(app).get("/health");
+    const second = await request(app).get("/health");
+
+    expect(first.status).toBe(200);
+    expect(second.status).toBe(200);
+    expect(healthCalls).toBe(1);
+  });
+
   it("logs raw request/response for /health", async () => {
     const rawLogger = new CapturingRawExchangeLogger();
     const app = buildApp({ rawExchangeLogger: rawLogger });

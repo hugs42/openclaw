@@ -29,6 +29,7 @@ export interface BridgeConfig {
   stableChecks: number;
   extractNoIndicatorStableMs: number;
   scrapeCallTimeoutMs: number;
+  healthUiPreflightCacheMs: number;
 
   maxPromptChars: number;
   maxMessageChars: number;
@@ -92,17 +93,27 @@ const APPROX_CHARS_PER_TOKEN = 4;
 const DEFAULT_CHATGPT_MAX_INPUT_CHARS = DEFAULT_CHATGPT_MAX_INPUT_TOKENS * APPROX_CHARS_PER_TOKEN;
 
 function parseBoolean(value: string | undefined, fallback: boolean): boolean {
-  if (value === undefined) return fallback;
+  if (value === undefined) {
+    return fallback;
+  }
   const lowered = value.trim().toLowerCase();
-  if (["1", "true", "yes", "y", "on"].includes(lowered)) return true;
-  if (["0", "false", "no", "n", "off"].includes(lowered)) return false;
+  if (["1", "true", "yes", "y", "on"].includes(lowered)) {
+    return true;
+  }
+  if (["0", "false", "no", "n", "off"].includes(lowered)) {
+    return false;
+  }
   return fallback;
 }
 
 function parseNumber(value: string | undefined, fallback: number, min = 0): number {
-  if (value === undefined) return fallback;
+  if (value === undefined) {
+    return fallback;
+  }
   const parsed = Number.parseInt(value, 10);
-  if (!Number.isFinite(parsed) || Number.isNaN(parsed)) return fallback;
+  if (!Number.isFinite(parsed) || Number.isNaN(parsed)) {
+    return fallback;
+  }
   return Math.max(parsed, min);
 }
 
@@ -172,12 +183,18 @@ function parseUiPatterns(value: string | undefined): UiErrorPattern[] {
 
     const normalized = parsed
       .map((item) => {
-        if (!item || typeof item !== "object") return null;
+        if (!item || typeof item !== "object") {
+          return null;
+        }
         const code = (item as { code?: unknown }).code;
         const includes = (item as { includes?: unknown }).includes;
-        if (typeof code !== "string" || !Array.isArray(includes)) return null;
+        if (typeof code !== "string" || !Array.isArray(includes)) {
+          return null;
+        }
         const list = includes.filter((v): v is string => typeof v === "string" && v.length > 0);
-        if (list.length === 0) return null;
+        if (list.length === 0) {
+          return null;
+        }
         return { code, includes: list };
       })
       .filter((item): item is UiErrorPattern => item !== null);
@@ -211,7 +228,11 @@ export function loadConfig(env: NodeJS.ProcessEnv = process.env): BridgeConfig {
   const sessionBindingsPath = expandHomePath(
     env.SESSION_BINDINGS_PATH || "~/.openclaw/chatgpt-pro-bridge/session-bindings.json",
   );
-  const defaultRawExchangePath = resolve(dirname(sessionBindingsPath), "logs", "raw-exchanges.jsonl");
+  const defaultRawExchangePath = resolve(
+    dirname(sessionBindingsPath),
+    "logs",
+    "raw-exchanges.jsonl",
+  );
 
   return {
     version: env.BRIDGE_VERSION || "1.1.0",
@@ -231,6 +252,7 @@ export function loadConfig(env: NodeJS.ProcessEnv = process.env): BridgeConfig {
     stableChecks: parseNumber(env.STABLE_CHECKS, 3, 1),
     extractNoIndicatorStableMs: parseNumber(env.EXTRACT_NO_INDICATOR_STABLE_MS, 15_000, 0),
     scrapeCallTimeoutMs: parseNumber(env.SCRAPE_CALL_TIMEOUT_MS, 15_000, 1),
+    healthUiPreflightCacheMs: parseNumber(env.HEALTH_UI_PREFLIGHT_CACHE_MS, 180_000, 0),
 
     maxPromptChars: parseNumber(env.MAX_PROMPT_CHARS, DEFAULT_CHATGPT_MAX_INPUT_CHARS, 1),
     maxMessageChars: parseNumber(env.MAX_MESSAGE_CHARS, DEFAULT_CHATGPT_MAX_INPUT_CHARS, 1),
